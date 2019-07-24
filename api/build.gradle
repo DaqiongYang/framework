@@ -1,0 +1,15 @@
+jar{
+    enabled = true
+}
+
+bootJar {
+    enabled = true
+}
+
+dependencies {
+    implementation project(':model')
+    implementation project(':common')
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
