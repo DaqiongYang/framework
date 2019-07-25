@@ -1,8 +1,7 @@
 /**  
  * @Title: listUtil.java  
  * @Package com.gsww.util  
- * @Description: TODO(用一句话描述该文件做什么)  
- * @author 强周亮  
+ * @author 强周亮
  * @date 2019年1月8日 上午11:18:49  
  * @version V1.0  
  */
