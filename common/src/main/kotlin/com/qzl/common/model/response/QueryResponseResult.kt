@@ -5,4 +5,4 @@ import lombok.ToString
 
 @Data
 @ToString
-class QueryResponseResult(resultCode: ResultCode, internal var queryResult: QueryResult<*>) : ResponseResult(resultCode)
+class QueryResponseResult(resultCode: ResultCode, var queryResult: QueryResult<*>) : ResponseResult(resultCode)

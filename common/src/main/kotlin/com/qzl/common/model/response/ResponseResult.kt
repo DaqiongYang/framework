@@ -10,13 +10,13 @@ import lombok.ToString
 open class ResponseResult : Response {
 
     //操作是否成功
-    private var success = Response.SUCCESS
+    var success = Response.SUCCESS
 
     //操作代码
-    private var code = Response.SUCCESS_CODE
+    var code = Response.SUCCESS_CODE
 
     //提示信息
-    private var message: String
+    var message: String
 
     constructor(resultCode: ResultCode) {
         this.success = resultCode.success()
