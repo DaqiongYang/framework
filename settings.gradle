@@ -4,4 +4,4 @@ pluginManagement {
     }
 }
 rootProject.name = 'framework'
-include('common','util','model','api','app')
+include('model','common','util','api','app')

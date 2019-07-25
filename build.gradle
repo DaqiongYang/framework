@@ -30,10 +30,6 @@ subprojects{
     sourceSets["main"].java.srcDir("src/main/kotlin")
     // java编译的时候缺省状态下会因为中文字符而失败
     [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
-    jar {
-        baseName = 'gs-rest-service'
-        version = '0.1.0'
-    }
 
     bootJar {
         enabled = false  // 默认不需要打可执行jar包
@@ -44,6 +40,7 @@ subprojects{
     }
     dependencies {
         implementation 'org.jetbrains.kotlin:kotlin-stdlib'
+        implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.9.2'
         implementation 'org.springframework.boot:spring-boot-starter-web'
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
     }

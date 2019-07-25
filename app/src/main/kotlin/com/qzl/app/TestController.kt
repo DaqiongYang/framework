@@ -18,8 +18,7 @@ class TestController :TestApi{
         //定义queryResult
         val queryResult = QueryResult<CmsPage>()
         val list = ArrayList<CmsPage>()
-        val cmsPage = CmsPage()
-        cmsPage.dataUrl = name
+        val cmsPage = CmsPage(name)
         list.add(cmsPage)
         queryResult.list = list
         queryResult.total = 1
