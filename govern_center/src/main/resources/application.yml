@@ -1,16 +1,16 @@
 server:
-  port: ${PORT:50101} #·şÎñ¶Ë¿Ú
+  port: ${PORT:50101} #æœåŠ¡ç«¯å£
 spring:
   application:
-    name: xc-govern-center #Ö¸¶¨·şÎñÃû
+    name: xc-govern-center #æŒ‡å®šæœåŠ¡å
 eureka:
   client:
-    registerWithEureka: true #·şÎñ×¢²á£¬ÊÇ·ñ½«×Ô¼º×¢²áµ½Eureka·şÎñÖĞ
-    fetchRegistry: true #·şÎñ·¢ÏÖ£¬ÊÇ·ñ´ÓEurekaÖĞ»ñÈ¡×¢²áĞÅÏ¢
-    serviceUrl: #Eureka¿Í»§¶ËÓëEureka·şÎñ¶ËµÄ½»»¥µØÖ·£¬¸ß¿ÉÓÃ×´Ì¬ÅäÖÃ¶Ô·½µÄµØÖ·£¬µ¥»ú×´Ì¬ÅäÖÃ×Ô¼º£¨Èç¹û²»ÅäÖÃÔòÄ¬ÈÏ±¾»ú8761¶Ë¿Ú£©
+    registerWithEureka: true #æœåŠ¡æ³¨å†Œï¼Œæ˜¯å¦å°†è‡ªå·±æ³¨å†Œåˆ°EurekaæœåŠ¡ä¸­
+    fetchRegistry: true #æœåŠ¡å‘ç°ï¼Œæ˜¯å¦ä»Eurekaä¸­è·å–æ³¨å†Œä¿¡æ¯
+    serviceUrl: #Eurekaå®¢æˆ·ç«¯ä¸EurekaæœåŠ¡ç«¯çš„äº¤äº’åœ°å€ï¼Œé«˜å¯ç”¨çŠ¶æ€é…ç½®å¯¹æ–¹çš„åœ°å€ï¼Œå•æœºçŠ¶æ€é…ç½®è‡ªå·±ï¼ˆå¦‚æœä¸é…ç½®åˆ™é»˜è®¤æœ¬æœº8761ç«¯å£ï¼‰
       defaultZone: ${EUREKA_SERVER:http://eureka02:50102/eureka/}
   server:
-    enable-self-preservation: false #ÊÇ·ñ¿ªÆô×ÔÎÒ±£»¤Ä£Ê½
-    eviction-interval-timer-in-ms: 60000 #·şÎñ×¢²á±íÇåÀí¼ä¸ô£¨µ¥Î»ºÁÃë£¬Ä¬ÈÏÊÇ60*1000£©
+    enable-self-preservation: false #æ˜¯å¦å¼€å¯è‡ªæˆ‘ä¿æŠ¤æ¨¡å¼
+    eviction-interval-timer-in-ms: 60000 #æœåŠ¡æ³¨å†Œè¡¨æ¸…ç†é—´éš”ï¼ˆå•ä½æ¯«ç§’ï¼Œé»˜è®¤æ˜¯60*1000ï¼‰
   instance:
     hostname: ${EUREKA_DOMAIN:eureka01}

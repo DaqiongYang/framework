@@ -37,8 +37,7 @@ deps.swagger2 = 'io.springfox:springfox-swagger2:2.9.2'
 deps.swagger_ui = 'io.springfox:springfox-swagger-ui:2.9.2'
 
 //eureka 配置
-// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies
-
 deps.eureka_server = 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+deps.eureka_client = 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
 ext.deps = deps
