@@ -39,5 +39,9 @@ deps.swagger_ui = 'io.springfox:springfox-swagger-ui:2.9.2'
 //eureka 配置
 deps.eureka_server = 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
 deps.eureka_client = 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+deps.openfeign = 'org.springframework.cloud:spring-cloud-starter-openfeign'
+deps.zuul = 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
 
+//okhttp3
+deps.okhttp3 = 'com.squareup.okhttp3:okhttp:3.9.1'
 ext.deps = deps

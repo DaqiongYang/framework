@@ -3,11 +3,13 @@ server:
 spring:
   application:
     name: xc-govern-center #指定服务名
+  freemarker:
+    prefer-file-system-access: false
 eureka:
   client:
-    registerWithEureka: true #服务注册，是否将自己注册到Eureka服务中
-    fetchRegistry: true #服务发现，是否从Eureka中获取注册信息
-    serviceUrl: #Eureka客户端与Eureka服务端的交互地址，高可用状态配置对方的地址，单机状态配置自己（如果不配置则默认本机8761端口）
+    register-with-eureka: true #服务注册，是否将自己注册到Eureka服务中
+    fetch-registry: true #服务发现，是否从Eureka中获取注册信息
+    service-url: #Eureka客户端与Eureka服务端的交互地址，高可用状态配置对方的地址，单机状态配置自己（如果不配置则默认本机8761端口）
       defaultZone: ${EUREKA_SERVER:http://eureka02:50102/eureka/}
   server:
     enable-self-preservation: false #是否开启自我保护模式
