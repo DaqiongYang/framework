@@ -1,0 +1,16 @@
+jar{
+    enabled = true
+}
+
+bootJar {
+    enabled = true
+}
+
+dependencies {
+    implementation deps.openfeign
+    implementation deps.eureka_client
+    implementation deps.okhttp3
+//    路由网关
+//    implementation deps.zuul
+    implementation project(':common')
+}
