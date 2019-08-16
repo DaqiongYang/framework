@@ -7,11 +7,12 @@ bootJar {
 }
 
 dependencies {
+    //实现负载均衡
     implementation deps.openfeign
+    //eureka客户端
     implementation deps.eureka_client
     implementation deps.okhttp3
+    //熔断机制
     implementation deps.hystrix
-//    路由网关
-//    implementation deps.zuul
     implementation project(':common')
 }

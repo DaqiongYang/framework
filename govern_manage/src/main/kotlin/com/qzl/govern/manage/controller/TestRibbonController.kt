@@ -27,7 +27,7 @@ class TestRibbonController {
     /**
      * 发起ribbon 请求
      */
-    @RequestMapping("/testK")
+    @RequestMapping("/**")
     @HystrixCommand(fallbackMethod="test1Fallback")
     fun test1(request: HttpServletRequest, response: HttpServletResponse):String {
         val servletPath = request.servletPath
