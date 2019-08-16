@@ -40,6 +40,7 @@ deps.swagger_ui = 'io.springfox:springfox-swagger-ui:2.9.2'
 deps.eureka_server = 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
 deps.eureka_client = 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 deps.openfeign = 'org.springframework.cloud:spring-cloud-starter-openfeign'
+deps.hystrix = 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
 deps.zuul = 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
 
 //okhttp3

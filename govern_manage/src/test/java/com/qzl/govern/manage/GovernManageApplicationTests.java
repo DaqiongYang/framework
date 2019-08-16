@@ -15,8 +15,6 @@ import java.util.Map;
 public class GovernManageApplicationTests {
 
     @Autowired
-    RestControllers restController;
-    @Autowired
     RestTemplate restTemplate;
     @Test
     public void testRibbon(){

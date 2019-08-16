@@ -10,6 +10,7 @@ dependencies {
     implementation deps.openfeign
     implementation deps.eureka_client
     implementation deps.okhttp3
+    implementation deps.hystrix
 //    路由网关
 //    implementation deps.zuul
     implementation project(':common')
