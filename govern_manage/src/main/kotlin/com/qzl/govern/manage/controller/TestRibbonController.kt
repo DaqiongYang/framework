@@ -1,6 +1,7 @@
 package com.qzl.govern.manage.controller
 
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand
+import com.qzl.govern.manage.config.ServiceListId
 import com.qzl.util.Util
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -21,8 +22,6 @@ class TestRibbonController {
     //服务端口号
     @Value("\${server.port}")
     var port: String? = null
-    //确定要获取的服务名称
-    val serviceID = "APP"
 
     /**
      * 发起ribbon 请求
@@ -34,11 +33,11 @@ class TestRibbonController {
         //请求参数
         val params = Util.getParamter(request.parameterMap)
         //ribbon客户端从eurekaServer中获取服务列表,根据服务名获取服务列表
-        val forEntity = restTemplate.getForEntity("http://$serviceID$servletPath$params", String::class.java)
+        val forEntity = restTemplate.getForEntity("http://${ServiceListId.APP}$servletPath$params", String::class.java)
         return forEntity?.body.toString()
     }
 
     fun test1Fallback(request: HttpServletRequest, response: HttpServletResponse):String{
-        return "$serviceID 服务发生异常，调派者端口：$port"
+        return "${ServiceListId.APP} 服务发生异常，调派者端口：$port"
     }
 }
