@@ -26,7 +26,7 @@ class TestController :TestApi{
         queryResult.total = 1
         //非法参数异常
         if (StringHelper.isEmptyString(name)){
-            ExceptionCast.cast(CommonCode.SUCCESS)
+            ExceptionCast.cast(CommonCode.INVALID_PARAM)
         }
 
         return QueryResponseResult(CommonCode.SUCCESS, queryResult)
