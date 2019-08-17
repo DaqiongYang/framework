@@ -40,9 +40,33 @@ deps.swagger_ui = 'io.springfox:springfox-swagger-ui:2.9.2'
 deps.eureka_server = 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
 deps.eureka_client = 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 deps.openfeign = 'org.springframework.cloud:spring-cloud-starter-openfeign'
+//熔断
 deps.hystrix = 'org.springframework.cloud:spring-cloud-starter-netflix-hystrix'
 deps.zuul = 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
 
+//security
+deps.security = 'org.springframework.cloud:spring-cloud-starter-security'
+deps.oauth2 = 'org.springframework.cloud:spring-cloud-starter-oauth2'
+
 //okhttp3
 deps.okhttp3 = 'com.squareup.okhttp3:okhttp:3.9.1'
+
+//mysql
+deps.mysql = 'mysql:mysql-connector-java:8.0.11'
+
+//start jdbc
+deps.starter_jdbc = 'org.springframework.boot:spring-boot-starter-jdbc'
+
+//druid
+deps.druid = 'com.alibaba:druid:1.1.10'
+deps.druid_starter = 'com.alibaba:druid-spring-boot-starter:1.1.10'
+
+//redis
+deps.redis = 'org.springframework.boot:spring-boot-starter-data-redis'
+
+//hibernate
+deps.hibernate_core = 'org.hibernate:hibernate-core:5.0.12.Final'
+
+
+
 ext.deps = deps

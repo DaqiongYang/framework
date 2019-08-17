@@ -7,5 +7,8 @@ bootJar {
 }
 
 dependencies {
-    implementation project(':util')
+    implementation project(':common')
+    implementation deps.hibernate_core
+    implementation deps.swagger2
+    implementation deps.swagger_ui
 }

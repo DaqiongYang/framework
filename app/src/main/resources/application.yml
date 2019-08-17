@@ -3,8 +3,6 @@ server:
 spring:
   application:
     name: app
-swagger:
-  enabled: true
 eureka:
   client:
     registerWithEureka: true #服务注册开关

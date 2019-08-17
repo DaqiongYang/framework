@@ -7,8 +7,8 @@ bootJar {
 }
 
 dependencies {
-    implementation project(':model')
-    implementation project(':common')
+    api project(':model')
+    api project(':common')
     //swagger2
     implementation deps.swagger2
     implementation deps.swagger_ui

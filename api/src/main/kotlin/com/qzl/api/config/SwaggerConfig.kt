@@ -1,6 +1,5 @@
 package com.qzl.api.config
 
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import springfox.documentation.builders.ApiInfoBuilder
@@ -22,8 +21,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @EnableSwagger2
 class SwaggerConfig {
     //是否开启swagger，正式环境一般是需要关闭的，可根据springboot的多环境配置进行设置
-    @Value(value = "\${swagger.enabled}")
-    internal var swaggerEnabled: Boolean = false
+//    @Value(value = "\${swagger.enabled}")
+    internal var swaggerEnabled: Boolean = true
 
     @Bean
     fun createRestApi(): Docket {
