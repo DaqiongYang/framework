@@ -21,6 +21,7 @@ dependencies {
     implementation deps.starter_jdbc
     implementation deps.druid
     implementation deps.druid_starter
+    implementation deps.fastjson
 
     implementation project(':api')
 }

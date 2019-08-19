@@ -8,8 +8,8 @@ import com.qzl.common.model.request.RequestData
  */
 class LoginRequest : RequestData() {
 
-    internal var username: String? = null
-    internal var password: String? = null
-    internal var verifycode: String? = null
+    var username: String? = null
+    var password: String? = null
+    var verifycode: String? = null
 
 }
