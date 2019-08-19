@@ -11,6 +11,7 @@ import com.qzl.model.ucenter.response.JwtResult
 import com.qzl.model.ucenter.response.LoginResult
 import com.qzl.ucenter.auth.service.AuthService
 import com.qzl.util.CookieUtil
+import org.apache.commons.codec.binary.Base64
 import org.apache.commons.lang.StringUtils
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.beans.factory.annotation.Value
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import org.springframework.web.context.request.RequestContextHolder
 import org.springframework.web.context.request.ServletRequestAttributes
+
+
 
 /**
  * @author Administrator
@@ -108,6 +111,7 @@ class AuthController : BaseController(),AuthControllerApi {
     @GetMapping("/userjwt")
     override fun userjwt(): JwtResult? {
         var uid = request.getParameter("uid")
+        //如果没有 则从cookie中获取
         if (StringUtils.isEmpty(uid)) {
             //取出cookie中的用户身份令牌
             uid = tokenFormCookie
@@ -123,6 +127,10 @@ class AuthController : BaseController(),AuthControllerApi {
         if (userToken != null) {
             //将jwt令牌返回给用户
             val jwt_token = userToken.jwt_token
+            // 获取到的数据需要解密，jwt_token中的三部分内容是通过.来连接的，使用的时候讲中间内容部分用base64解码皆可以得到想要的值
+            val substring = jwt_token.substring(jwt_token.indexOf("."), jwt_token.lastIndexOf("."))
+            val encodeBase64 = Base64.decodeBase64(substring.toByteArray(charset("UTF-8")))
+            println("RESULT: " + String(encodeBase64))
             return JwtResult(CommonCode.SUCCESS, jwt_token)
         }
         return null
