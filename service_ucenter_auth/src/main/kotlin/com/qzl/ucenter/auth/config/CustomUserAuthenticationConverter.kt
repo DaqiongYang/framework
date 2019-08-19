@@ -1,47 +1,45 @@
-package com.qzl.ucenter.auth.config;
+package com.qzl.ucenter.auth.config
 
-import com.qzl.ucenter.auth.service.UserJwt;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.AuthorityUtils;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter;
-import org.springframework.stereotype.Component;
+import com.qzl.ucenter.auth.service.UserJwt
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.security.core.Authentication
+import org.springframework.security.core.authority.AuthorityUtils
+import org.springframework.security.core.userdetails.UserDetails
+import org.springframework.security.core.userdetails.UserDetailsService
+import org.springframework.security.oauth2.provider.token.DefaultUserAuthenticationConverter
+import org.springframework.stereotype.Component
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.util.LinkedHashMap
 
 @Component
-public class CustomUserAuthenticationConverter extends DefaultUserAuthenticationConverter {
+class CustomUserAuthenticationConverter : DefaultUserAuthenticationConverter() {
     @Autowired
-    UserDetailsService userDetailsService;
+    internal var userDetailsService: UserDetailsService? = null
 
-    @Override
-    public Map<String, ?> convertUserAuthentication(Authentication authentication) {
-        LinkedHashMap response = new LinkedHashMap();
-        String name = authentication.getName();
-        response.put("user_name", name);
+    override fun convertUserAuthentication(authentication: Authentication): Map<String, *> {
+        val response = LinkedHashMap<String,Any?>()
+        val name = authentication.name
+        response.put("user_name", name)
 
-        Object principal = authentication.getPrincipal();
-        UserJwt userJwt = null;
-        if(principal instanceof  UserJwt){
-            userJwt = (UserJwt) principal;
-        }else{
+        val principal = authentication.principal
+        var userJwt: UserJwt? = null
+        if (principal is UserJwt) {
+            userJwt = principal
+        } else {
             //refresh_token默认不去调用userdetailService获取用户信息，这里我们手动去调用，得到 UserJwt
-            UserDetails userDetails = userDetailsService.loadUserByUsername(name);
-            userJwt = (UserJwt) userDetails;
+            val userDetails = userDetailsService!!.loadUserByUsername(name)
+            userJwt = userDetails as UserJwt
         }
-        response.put("name", userJwt.getName());
-        response.put("id", userJwt.getId());
-        response.put("utype",userJwt.getUtype());
-        response.put("userpic",userJwt.getUserpic());
-        response.put("companyId",userJwt.getCompanyId());
-        if (authentication.getAuthorities() != null && !authentication.getAuthorities().isEmpty()) {
-            response.put("authorities", AuthorityUtils.authorityListToSet(authentication.getAuthorities()));
+        response.put("name", userJwt.name)
+        response.put("id", userJwt.id)
+        response.put("utype", userJwt.utype)
+        response.put("userpic", userJwt.userpic)
+        response.put("companyId", userJwt.companyId)
+        if (authentication.authorities != null && !authentication.authorities.isEmpty()) {
+            response.put("authorities", AuthorityUtils.authorityListToSet(authentication.authorities))
         }
 
-        return response;
+        return response
     }
 
 

@@ -4,6 +4,7 @@ import com.qzl.api.auth.AuthControllerApi
 import com.qzl.common.exception.ExceptionCast
 import com.qzl.common.model.response.CommonCode
 import com.qzl.common.model.response.ResponseResult
+import com.qzl.common.web.BaseController
 import com.qzl.model.ucenter.request.LoginRequest
 import com.qzl.model.ucenter.response.AuthCode
 import com.qzl.model.ucenter.response.JwtResult
@@ -26,7 +27,7 @@ import org.springframework.web.context.request.ServletRequestAttributes
  */
 @RestController
 @RequestMapping("/")
-class AuthController : AuthControllerApi {
+class AuthController : BaseController(),AuthControllerApi {
 
     @Value("\${auth.clientId}")
     internal var clientId: String? = null
@@ -106,8 +107,16 @@ class AuthController : AuthControllerApi {
 
     @GetMapping("/userjwt")
     override fun userjwt(): JwtResult? {
-        //取出cookie中的用户身份令牌
-        val uid = tokenFormCookie ?: return JwtResult(CommonCode.FAIL, null!!)
+        var uid = request.getParameter("uid")
+        if (StringUtils.isEmpty(uid)) {
+            //取出cookie中的用户身份令牌
+            uid = tokenFormCookie
+        }
+
+        if (StringUtils.isEmpty(uid)) {
+            //取出cookie中的用户身份令牌
+            return JwtResult(CommonCode.FAIL, null)
+        }
 
         //拿身份令牌从redis中查询jwt令牌
         val userToken = authService.getUserToken(uid)
