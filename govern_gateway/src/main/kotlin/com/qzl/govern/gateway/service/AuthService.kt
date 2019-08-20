@@ -44,7 +44,7 @@ class AuthService {
     }
 
     //查询令牌的有效期
-    fun getExpire(access_token: String): Long {
+    fun getExpire(access_token: String?): Long {
         //key
         val key = "user_token:$access_token"
         return stringRedisTemplate.getExpire(key, TimeUnit.SECONDS)
