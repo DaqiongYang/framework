@@ -1,0 +1,27 @@
+jar{
+    enabled = true
+}
+
+bootJar {
+    enabled = true
+}
+
+dependencies {
+    //实现负载均衡
+    implementation deps.openfeign
+    //eureka客户端
+    implementation deps.eureka_client
+    implementation deps.okhttp3
+
+    //安全认证
+    implementation deps.security
+    implementation deps.oauth2
+    implementation deps.redis
+    implementation deps.mysql
+    implementation deps.starter_jdbc
+    implementation deps.druid
+    implementation deps.druid_starter
+    implementation deps.fastjson
+
+    implementation project(':api')
+}

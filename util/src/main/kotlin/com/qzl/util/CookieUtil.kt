@@ -17,13 +17,14 @@ object CookieUtil {
      * @param value    cookie值
      * @param maxAge   cookie生命周期 以秒为单位
      */
-    fun addCookie(response: HttpServletResponse, domain: String, path: String, name: String,
-                  value: String, maxAge: Int, httpOnly: Boolean) {
+    @JvmStatic
+    fun addCookie(response: HttpServletResponse, domain: String?, path: String?, name: String?,
+                  value: String?, maxAge: Int?, httpOnly: Boolean?) {
         val cookie = Cookie(name, value)
         cookie.domain = domain
         cookie.path = path
-        cookie.maxAge = maxAge
-        cookie.isHttpOnly = httpOnly
+        cookie.maxAge = maxAge?:-1
+        cookie.isHttpOnly = httpOnly?:false
         response.addCookie(cookie)
     }
 
@@ -32,6 +33,7 @@ object CookieUtil {
      * @param request
      * @return map<cookieName></cookieName>,cookieValue>
      */
+    @JvmStatic
     fun readCookie(request: HttpServletRequest, vararg cookieNames: String): Map<String, String> {
         val cookieMap = HashMap<String, String>()
         val cookies = request.cookies

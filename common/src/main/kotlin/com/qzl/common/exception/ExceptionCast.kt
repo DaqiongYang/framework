@@ -10,6 +10,7 @@ import com.qzl.common.model.response.ResultCode
  */
 object ExceptionCast {
 
+    @JvmStatic
     fun cast(resultCode: ResultCode) {
         throw CustomException(resultCode)
     }

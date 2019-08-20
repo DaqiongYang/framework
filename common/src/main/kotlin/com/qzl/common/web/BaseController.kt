@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession
  * @class BaseController
  * @package com.qzl.common.web
  */
-class BaseController {
+open class BaseController {
     protected lateinit var request: HttpServletRequest
 
     protected lateinit var response: HttpServletResponse
