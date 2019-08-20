@@ -20,7 +20,7 @@ class UcenterController : UcenterControllerApi {
     lateinit var userService: UserService
 
     @GetMapping("/getuserext")
-    override fun getUserext(@RequestParam("username") username: String): XcUserExt {
+    override fun getUserext(@RequestParam("username") username: String): XcUserExt? {
         return userService.getUserExt(username)
     }
 }
