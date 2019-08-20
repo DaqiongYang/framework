@@ -1,57 +1,52 @@
-package com.qzl.govern.gateway.service;
+package com.qzl.govern.gateway.service
 
-import com.qzl.util.CookieUtil;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.stereotype.Service;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
+import com.qzl.util.CookieUtil
+import org.apache.commons.lang.StringUtils
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.data.redis.core.StringRedisTemplate
+import org.springframework.stereotype.Service
+import java.util.concurrent.TimeUnit
+import javax.servlet.http.HttpServletRequest
 
 /**
  * @author Administrator
  * @version 1.0
- **/
+ */
 @Service
-public class AuthService {
+class AuthService {
 
     @Autowired
-    StringRedisTemplate stringRedisTemplate;
+    lateinit var stringRedisTemplate: StringRedisTemplate
 
     //从头取出jwt令牌
-    public String getJwtFromHeader(HttpServletRequest request){
+    fun getJwtFromHeader(request: HttpServletRequest): String? {
         //取出头信息
-        String authorization = request.getHeader("Authorization");
-        if(StringUtils.isEmpty(authorization)){
-            return null;
+        val authorization = request.getHeader("Authorization")
+        if (StringUtils.isEmpty(authorization)) {
+            return null
         }
-        if(!authorization.startsWith("Bearer ")){
-            return null;
-        }
+        return if (!authorization.startsWith("Bearer ")) {
+            null
+        } else authorization.substring(7)
         //取到jwt令牌
-        String jwt = authorization.substring(7);
-        return jwt;
 
 
     }
+
     //从cookie取出token
     //查询身份令牌
-    public String getTokenFromCookie(HttpServletRequest request){
-        Map<String, String> cookieMap = CookieUtil.readCookie(request, "uid");
-        String access_token = cookieMap.get("uid");
-        if(StringUtils.isEmpty(access_token)){
-            return null;
-        }
-        return access_token;
+    fun getTokenFromCookie(request: HttpServletRequest): String? {
+        val cookieMap = CookieUtil.readCookie(request, "uid")
+        val access_token = cookieMap["uid"]
+        return if (StringUtils.isEmpty(access_token)) {
+            null
+        } else access_token
     }
 
     //查询令牌的有效期
-     public long getExpire(String access_token){
+    fun getExpire(access_token: String): Long {
         //key
-         String key = "user_token:"+access_token;
-         Long expire = stringRedisTemplate.getExpire(key, TimeUnit.SECONDS);
-         return expire;
-     }
+        val key = "user_token:$access_token"
+        return stringRedisTemplate.getExpire(key, TimeUnit.SECONDS)
+    }
 }
