@@ -27,9 +27,9 @@ zuul:
       #   ignoredHeaders: 默认为空表示不过虑任何头
 eureka:
   client:
-    registerWithEureka: true #服务注册开关
-    fetchRegistry: true #服务发现开关
-    serviceUrl: #Eureka客户端与Eureka服务端进行交互的地址，多个中间用逗号分隔
+    register-with-eureka: true #服务注册开关
+    fetch-registry: true #服务发现开关
+    service-url: #Eureka客户端与Eureka服务端进行交互的地址，多个中间用逗号分隔
       defaultZone: ${EUREKA_SERVER:http://localhost:50101/eureka/}
   instance:
     prefer-ip-address:  true  #将自己的ip地址注册到Eureka服务中
