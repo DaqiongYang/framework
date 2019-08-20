@@ -1,6 +1,5 @@
 package com.qzl.api.config
 
-import org.springframework.beans.factory.annotation.Value
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import springfox.documentation.builders.ApiInfoBuilder
@@ -22,7 +21,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2
 @EnableSwagger2
 class SwaggerConfig {
     //是否开启swagger，正式环境一般是需要关闭的，可根据springboot的多环境配置进行设置
-    @Value(value = "\${swagger.enabled}")
+//    @Value(value = "\${swagger.enabled}")
     internal var swaggerEnabled: Boolean = true
 
     @Bean
@@ -33,8 +32,7 @@ class SwaggerConfig {
                 // 扫描的路径包
                 .apis(RequestHandlerSelectors.basePackage("com.qzl"))
                 // 指定路径处理PathSelectors.any()代表所有的路径
-                .paths(PathSelectors.any())
-                .build()
+                .paths(PathSelectors.any()).build().pathMapping("/")
     }
 
     private fun apiInfo(): ApiInfo {

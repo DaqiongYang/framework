@@ -2,6 +2,7 @@ package com.qzl.ucenter.auth.service;
 
 import com.qzl.model.ucenter.XcMenu;
 import com.qzl.model.ucenter.ext.XcUserExt;
+import com.qzl.ucenter.auth.client.UserClient;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -11,19 +12,25 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * @author 强周亮
+ * @desc 用户登录时就会走这个方法，来获取用户信息
+ * @email 2538096489@qq.com
+ * @time 2019/8/20 17:07
+ * @class UserDetailsServiceImpl
+ * @package com.qzl.ucenter.auth.service
+ */
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
-//    @Autowired
-//    UserClient userClient;
+    @Autowired
+    UserClient userClient;
 
     @Autowired
     ClientDetailsService clientDetailsService;
@@ -44,15 +51,16 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         if (StringUtils.isEmpty(username)) {
             return null;
         }
-        //远程调用用户中心根据账号查询用户信息
-//        XcUserExt userext = userClient.getUserext(username);
-//        if(userext == null){
-//            //返回空给spring security表示用户不存在
-//            return null;
-//        }
-        XcUserExt userext = new XcUserExt();
-        userext.setUsername("itcast");
-        userext.setPassword(new BCryptPasswordEncoder().encode("123"));
+        //远程调用用户中心根据账号查询用户信息，默认密码111111，采用new BCryptPasswordEncoder().encode("111111")加密
+        XcUserExt userext = userClient.getUserext(username);
+        if(userext == null){
+            //返回空给spring security表示用户不存在
+            return null;
+        }
+//        本地手动写死验证
+//        XcUserExt userext = new XcUserExt();
+//        userext.setUsername("itcast");
+//        userext.setPassword(new BCryptPasswordEncoder().encode("123"));
         userext.setPermissions(new ArrayList<XcMenu>());//权限暂时用静态的
 
         //取出正确密码（hash值）
