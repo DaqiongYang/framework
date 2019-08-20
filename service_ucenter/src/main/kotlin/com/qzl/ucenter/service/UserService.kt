@@ -1,52 +1,48 @@
-package com.qzl.ucenter.service;
+package com.qzl.ucenter.service
 
-import com.qzl.model.ucenter.XcCompanyUser;
-import com.qzl.model.ucenter.XcUser;
-import com.qzl.model.ucenter.ext.XcUserExt;
-import com.qzl.ucenter.dao.XcCompanyUserRepository;
-import com.qzl.ucenter.dao.XcUserRepository;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import com.qzl.model.ucenter.XcUser
+import com.qzl.model.ucenter.ext.XcUserExt
+import com.qzl.ucenter.dao.XcCompanyUserRepository
+import com.qzl.ucenter.dao.XcUserRepository
+import org.springframework.beans.BeanUtils
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
 
 /**
  * @author Administrator
  * @version 1.0
- **/
+ */
 @Service
-public class UserService {
+class UserService {
 
     @Autowired
-    XcUserRepository xcUserRepository;
+    lateinit var xcUserRepository: XcUserRepository
 
     @Autowired
-    XcCompanyUserRepository xcCompanyUserRepository;
+    lateinit var xcCompanyUserRepository: XcCompanyUserRepository
 
     //根据账号查询xcUser信息
-    public XcUser findXcUserByUsername(String username){
-        return xcUserRepository.findByUsername(username);
+    fun findXcUserByUsername(username: String): XcUser {
+        return xcUserRepository.findByUsername(username)
     }
 
     //根据账号查询用户信息
-    public XcUserExt getUserExt(String username){
+    fun getUserExt(username: String): XcUserExt? {
         //根据账号查询xcUser信息
-        XcUser xcUser = this.findXcUserByUsername(username);
-        if(xcUser == null){
-            return null;
-        }
-        //用户id
-        String userId = xcUser.getId();
+        val xcUser = this.findXcUserByUsername(username) ?: return null
+//用户id
+        val userId = xcUser.id
         //根据用户id查询用户所属公司id
-        XcCompanyUser xcCompanyUser = xcCompanyUserRepository.findByUserId(userId);
+        val xcCompanyUser = xcCompanyUserRepository.findByUserId(userId!!)
         //取到用户的公司id
-        String companyId = null;
-        if(xcCompanyUser!=null){
-            companyId = xcCompanyUser.getCompanyId();
+        var companyId: String? = null
+        if (xcCompanyUser != null) {
+            companyId = xcCompanyUser.companyId
         }
-        XcUserExt xcUserExt = new XcUserExt();
-        BeanUtils.copyProperties(xcUser,xcUserExt);
-        xcUserExt.setCompanyId(companyId);
-        return xcUserExt;
+        val xcUserExt = XcUserExt()
+        BeanUtils.copyProperties(xcUser, xcUserExt)
+        xcUserExt.companyId = companyId
+        return xcUserExt
 
     }
 
