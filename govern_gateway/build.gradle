@@ -1,0 +1,21 @@
+jar{
+    enabled = true
+}
+
+bootJar {
+    enabled = true
+}
+
+dependencies {
+    implementation project(':common')
+    //实现路由网关
+    implementation deps.zuul
+    //实现负载均衡
+    implementation deps.openfeign
+    //eureka客户端
+    implementation deps.eureka_client
+    implementation deps.okhttp3
+
+    implementation deps.redis
+    implementation deps.fastjson
+}

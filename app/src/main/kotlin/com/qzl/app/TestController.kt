@@ -9,10 +9,12 @@ import com.qzl.model.CmsPage
 import com.qzl.util.StringHelper
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
 
 @RestController
+@RequestMapping("/app")
 class TestController :TestApi{
 
     @Value("\${server.port}")
