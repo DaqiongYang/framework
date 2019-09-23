@@ -8,10 +8,6 @@ import org.springframework.stereotype.Service
 import java.util.concurrent.TimeUnit
 import javax.servlet.http.HttpServletRequest
 
-/**
- * @author Administrator
- * @version 1.0
- */
 @Service
 class AuthService {
 
