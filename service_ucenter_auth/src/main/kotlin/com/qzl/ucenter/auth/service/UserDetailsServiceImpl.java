@@ -18,14 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-/**
- * @author 强周亮
- * @desc 用户登录时就会走这个方法，来获取用户信息
- * @email 2538096489@qq.com
- * @time 2019/8/20 17:07
- * @class UserDetailsServiceImpl
- * @package com.qzl.ucenter.auth.service
- */
+
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 
@@ -45,19 +38,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             if(clientDetails!=null){
                 //密码
                 String clientSecret = clientDetails.getClientSecret();
-                return new User(username,clientSecret, AuthorityUtils.commaSeparatedStringToAuthorityList(""));
+                return new User(username,clientSecret,AuthorityUtils.commaSeparatedStringToAuthorityList(""));
             }
         }
         if (StringUtils.isEmpty(username)) {
             return null;
         }
-        //远程调用用户中心根据账号查询用户信息，默认密码111111，采用new BCryptPasswordEncoder().encode("111111")加密
+        //远程调用用户中心根据账号查询用户信息
         XcUserExt userext = userClient.getUserext(username);
         if(userext == null){
             //返回空给spring security表示用户不存在
             return null;
         }
-//        本地手动写死验证
 //        XcUserExt userext = new XcUserExt();
 //        userext.setUsername("itcast");
 //        userext.setPassword(new BCryptPasswordEncoder().encode("123"));
@@ -75,7 +67,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 //        user_permission.add("course_get_baseinfo");
 //        user_permission.add("course_find_pic");
         String user_permission_string  = StringUtils.join(user_permission.toArray(), ",");
-        UserJwt userDetails = new UserJwt(username, password, AuthorityUtils.commaSeparatedStringToAuthorityList(user_permission_string));
+        UserJwt userDetails = new UserJwt(username,
+                password,
+                AuthorityUtils.commaSeparatedStringToAuthorityList(user_permission_string));
         userDetails.setId(userext.getId());
         userDetails.setUtype(userext.getUtype());//用户类型
         userDetails.setCompanyId(userext.getCompanyId());//所属企业

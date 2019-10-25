@@ -59,12 +59,19 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     //Http安全配置，对每个到达系统的http请求链接进行校验
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        //所有请求必须认证通过
+        /*//所有请求必须认证通过
         http.authorizeRequests()
                 //下边的路径放行,"/**"可以放行所有请求路径，在开发阶段可以加上，方便测试
                 .antMatchers("/v2/api-docs", "/swagger-resources/configuration/ui",
                         "/swagger-resources","/swagger-resources/configuration/security",
                         "/swagger-ui.html","/webjars/**","/**").permitAll()
+                .anyRequest().authenticated();*/
+        //所有请求必须认证通过
+        http.authorizeRequests()
+                //下边的路径放行,"/**"可以放行所有请求路径，在开发阶段可以加上，方便测试
+                .antMatchers("/v2/api-docs", "/swagger-resources/configuration/ui",
+                        "/swagger-resources","/swagger-resources/configuration/security",
+                        "/swagger-ui.html","/webjars/**").permitAll()
                 .anyRequest().authenticated();
     }
 }
