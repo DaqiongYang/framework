@@ -1,5 +1,6 @@
 package com.qzl.ucenter.auth.service;
 
+import com.qzl.common.web.BaseController;
 import com.qzl.model.ucenter.XcMenu;
 import com.qzl.model.ucenter.ext.XcUserExt;
 import com.qzl.ucenter.auth.client.UserClient;
